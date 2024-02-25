@@ -6,45 +6,68 @@ import './FormComp.css';
 class FormComp extends Component {
   constructor(props) {
     super(props);
-    this.state = { input: "" };
-    
+    this.state = { value: "" };
+
     console.log("constructor");
   }
 
-  componentDidMount() {
-    console.log("componentDidMount()");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('getDerivedStateFromProps');
+    return null;
   }
 
-  shouldComponentUpdate() {
-    console.log("shouldComponentUpdate()");
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate');
     return true;
   }
 
-  componentDidUpdate() {
-    console.log("componentDidUpdate()");
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('getSnapshotBeforeUpdate');
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
+  handleSubmit = (event) => {
+    alert('Вы ввели: ' + this.state.value);
+    event.preventDefault();
   }
 
   handleChange = (event) => {
-    this.setState(() => ({input: event.target.value}))
-    console.log(this.state)
+    this.setState({value: event.target.value});
+    console.log(this.state);
   }
 
   render() {
     return (
-      <>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Ввод:</label>
-          <input 
-          type="email" 
-          className="form-control form" 
-          id="exampleInputEmail1" 
-          aria-describedby="emailHelp" 
-          placeholder="Enter email" 
+          <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+            className="form-control form"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
 
           />
         </div>
-        <button type="button" className="btn btn-primary">Submit</button>
-      </>
+        <button
+          type="submit"
+          className="btn btn-primary"
+        >button</button>
+      </form>
     );
   }
 }
