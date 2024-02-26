@@ -7,7 +7,8 @@ class FormComp extends Component {
   constructor(props) {
     super(props);
     this.state = { value: "" };
-
+    this.time = props.now;
+    console.log(this.time);
     console.log("constructor");
   }
 
@@ -51,6 +52,7 @@ class FormComp extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p class="h3">{12 < this.time < 24 ? 'Добрый день!' : 'Добрый вечер!'}</p>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Ввод:</label>
           <input

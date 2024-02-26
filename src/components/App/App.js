@@ -3,9 +3,16 @@ import './App.css';
 import FormComp from '../FormComp/FormComp'
 
 function App() {
+
+  const time = new Date().getHours()
+  
+  console.log(typeof(time));
+
   return (
     <div className="App">
-      <FormComp/>
+      <FormComp 
+      now = {time}
+      />
     </div>
   );
 }
